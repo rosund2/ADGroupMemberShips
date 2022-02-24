@@ -2,8 +2,8 @@
 #r "nuget: FsPrettyTable"
 
 #load "CsvFilterConfig.fsx"
-
 open CsvFilterConfig
+
 open FSharp.Data
 
 fsi.ShowDeclarationValues <- false
