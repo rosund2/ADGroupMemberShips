@@ -5,12 +5,6 @@ open System.Collections
 open System.DirectoryServices
 open System.Collections.Generic
 
-
-// let adsrv = new DirectoryEntry ( @"LDAP://lyse.no/DC=lyse,DC=no")
-// adsrv.AuthenticationType = AuthenticationTypes.ReadonlyServer
-
-// let userQuery = @"(&(objectCategory=person)(objectClass=user)(sAMAccountName=*)(!useraccountcontrol:1.2.840.113556.1.4.803:=2))"
-
 let propertyNames (ds:DirectoryEntry) q =     
     let ds = new DirectorySearcher(ds)
     ds.Filter <- q
@@ -71,41 +65,5 @@ let ldapSearcher (de:DirectoryEntry) (attrs:list<string> option) (f:(DirectorySe
         convertDictionaryToMap props x.Properties        
     ) 
     |> Seq.toList
-
-
-
-// let userAttributes = Some ["samaccountname";"memberof";"company";"department";"title";"userprincipalname";"employeetype";"employeenumber"]
-// let ldapSearcherWithDe = ldapSearcher adsrv
-
-// let queryResult = ldapSearcherWithDe userAttributes None userQuery
-
-// printfn "Found %i employees" queryResult.Length
-
-// let firstAttrToString key  (m:Map<string,list<string>>) = 
-//     match m.TryFind key  with 
-//     | Some a -> List.head a
-//     | None -> "null"  
-
-// let onlyWithGroups = queryResult |> List.filter (fun x -> x.ContainsKey("memberof") && x.ContainsKey("company") ) 
-
-// let sq =     
-//     seq {
-//         for entry in onlyWithGroups do              
-//             yield! seq {for group in entry.["memberof"] -> 
-//                         seq {
-//                             group; 
-//                             (firstAttrToString "userprincipalname" entry);                            
-//                             (firstAttrToString "company" entry);
-//                             (firstAttrToString "title" entry);
-//                             (firstAttrToString "employeetype" entry)
-//                             (firstAttrToString "employeenumber" entry)
-//                             }}
-//     }
-
-// let wtof = 
-//     use file = System.IO.File.CreateText("Atest2.cvs")
-//     for i in sq do 
-//         fprintfn file "%s" (String.concat ";" i)
-//     file.Close
 
 
